@@ -1,0 +1,7 @@
+<app-preloader [isLoading]="isLoading">
+  <div class="timer">
+    <ng-container *ngIf="timer$ | async as time">
+      {{time.years}} : {{time.days}} : {{time.hours}} : {{time.minutes}} : {{time.seconds}}
+    </ng-container>
+  </div>
+</app-preloader>

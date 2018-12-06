@@ -1,0 +1,32 @@
+<app-preloader [isLoading]="isLoading">
+  <form [formGroup]="personEditForm" novalidate (ngSubmit)="onSubmit()" class="form">
+    <mat-form-field>
+      <input matInput placeholder="Имя" name="name" formControlName="name" />
+      <mat-error *ngIf="isControlInvalid('name')">
+        Не указано имя
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Выберите страну" formControlName="country">
+        <mat-option *ngFor="let country of countries$ | async" [value]="country.nativeName">
+          <img with="10" height="10" [src]="country.flag">
+          {{country.nativeName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="isControlInvalid('country')">
+        Не указана страна
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Дата рождения" name="dateOfBirth" formControlName="dateOfBirth">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="isControlInvalid('dateOfBirth')">
+        Не указана дата рождения
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button>
+      Отправить
+    </button>
+  </form>
+</app-preloader>
